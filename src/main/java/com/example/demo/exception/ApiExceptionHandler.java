@@ -5,23 +5,21 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-import java.util.HashMap;
-import java.util.Map;
-
+/**
+ * Global exception handler for the application.
+ */
 @ControllerAdvice
 public class ApiExceptionHandler {
 
-    @ExceptionHandler(ResourceNotFoundException.class)
-    public ResponseEntity<Map<String, String>> handleNotFound(ResourceNotFoundException ex) {
-        Map<String, String> error = new HashMap<>();
-        error.put("error", ex.getMessage());
-        return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
+    // Handle all runtime exceptions
+    @ExceptionHandler(RuntimeException.class)
+    public ResponseEntity<String> handleRuntimeException(RuntimeException ex) {
+        return new ResponseEntity<>("Runtime error: " + ex.getMessage(), HttpStatus.BAD_REQUEST);
     }
 
-    @ExceptionHandler(ValidationException.class)
-    public ResponseEntity<Map<String, String>> handleValidation(ValidationException ex) {
-        Map<String, String> error = new HashMap<>();
-        error.put("error", ex.getMessage());
-        return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
+    // Handle all other exceptions
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<String> handleException(Exception ex) {
+        return new ResponseEntity<>("Server error: " + ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }
