@@ -21,11 +21,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User registerUser(User user) {
+    public User register(User user) {
         if (userRepository.existsByEmail(user.getEmail())) {
             throw new ValidationException("Email already exists");
         }
-
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         return userRepository.save(user);
     }
