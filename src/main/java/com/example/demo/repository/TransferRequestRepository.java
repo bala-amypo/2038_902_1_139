@@ -5,6 +5,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface TransferRequestRepository extends JpaRepository<TransferRequest, Long> {
+public interface TransferRequestRepository
+        extends JpaRepository<TransferRequest, Long> {
+
     List<TransferRequest> findByStudentId(String studentId);
 }
