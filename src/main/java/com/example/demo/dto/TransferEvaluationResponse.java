@@ -1,5 +1,9 @@
+package com.example.demo.dto;
+import java.util.List;
 public class TransferEvaluationResponse {
-    private Double totalTransferableCredits;
-    private String status;
-    private String remarks;
+public Double totalTransferableCredits;
+public List<String> acceptedCourses;
+public List<String> missingCourses;
+public String status;
+public String remarks;
 }

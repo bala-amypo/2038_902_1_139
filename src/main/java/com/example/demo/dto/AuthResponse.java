@@ -1,5 +1,6 @@
+package com.example.demo.dto;
 public class AuthResponse {
-    private String token;
-    private String email;
-    private String role;
+public String token;
+public String email;
+public String role;
 }

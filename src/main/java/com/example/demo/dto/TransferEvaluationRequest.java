@@ -1,11 +1,8 @@
+package com.example.demo.dto;
+import java.util.List;
 public class TransferEvaluationRequest {
-    private Long sourceProgramId;
-    private Long targetProgramId;
-    private List<CourseDTO> completedCourses;
-
-    public static class CourseDTO {
-        public String code;
-        public Double credits;
-        public String grade;
-    }
+public Long sourceProgramId;
+4
+public Long targetProgramId;
+public List<CompletedCourseDTO> completedCourses;
 }
