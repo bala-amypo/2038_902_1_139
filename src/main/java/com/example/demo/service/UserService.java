@@ -1,28 +1,10 @@
-package com.example.demo.service.impl;
+package com.example.demo.service;
 
 import com.example.demo.entity.User;
-import com.example.demo.exception.ResourceNotFoundException;
-import com.example.demo.repository.UserRepository;
-import com.example.demo.service.UserService;
-import org.springframework.stereotype.Service;
 
-@Service
-public class UserServiceImpl implements UserService {
+public interface UserService {
 
-    private final UserRepository repo;
+    User register(User user);
 
-    public UserServiceImpl(UserRepository repo) {
-        this.repo = repo;
-    }
-
-    @Override
-    public User register(User user) {
-        return repo.save(user);
-    }
-
-    @Override
-    public User login(String email) {
-        return repo.findByEmail(email)
-                .orElseThrow(() -> new ResourceNotFoundException("User not found"));
-    }
+    User login(String email);
 }
