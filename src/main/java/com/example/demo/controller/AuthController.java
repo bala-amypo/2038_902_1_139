@@ -1,7 +1,7 @@
 package com.example.demo.controller;
 
-import com.example.demo.dto.AuthRequest;
-import com.example.demo.dto.AuthResponse;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.web.bind.annotation.*;
 
@@ -10,7 +10,15 @@ import org.springframework.web.bind.annotation.*;
 public class AuthController {
 
     @PostMapping("/login")
-    public AuthResponse login(@RequestBody AuthRequest request) {
-        return new AuthResponse();
+    public Map<String, Object> login(@RequestBody Map<String, String> request) {
+
+        String username = request.get("username");
+        String password = request.get("password");
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("username", username);
+        response.put("status", "LOGIN_SUCCESS");
+
+        return response;
     }
 }
