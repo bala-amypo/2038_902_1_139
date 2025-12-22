@@ -1,16 +1,18 @@
 package com.example.demo.controller;
+
+import com.example.demo.dto.TransferEvaluationRequest;
+import com.example.demo.dto.TransferEvaluationResponse;
+
 import org.springframework.web.bind.annotation.*;
-import com.example.demo.dto.*;
+
 @RestController
-@RequestMapping("/api/transfers")
+@RequestMapping("/transfer")
 public class TransferEvaluationController {
-@PostMapping("/evaluate")
-public TransferEvaluationResponse evaluate(@RequestBody
-TransferEvaluationRequest req) {
-TransferEvaluationResponse res = new TransferEvaluationResponse();
-res.totalTransferableCredits = 20.0;
-res.status = "APPROVED";
-res.remarks = "Eligible";
-return res;
-}
+
+    @PostMapping("/evaluate")
+    public TransferEvaluationResponse evaluate(
+            @RequestBody TransferEvaluationRequest request) {
+
+        return new TransferEvaluationResponse();
+    }
 }
