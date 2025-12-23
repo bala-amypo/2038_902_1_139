@@ -1,45 +1,90 @@
 package com.example.demo.entity;
 
 import jakarta.persistence.*;
+import java.util.List;
 
 @Entity
-@Table(name = "universities", uniqueConstraints = @UniqueConstraint(columnNames = "name"))
-public class University {
+@Table(name = "transfer_requests")
+public class TransferRequest {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, unique = true)
-    private String name;
+    private String studentId;
 
-    private String accreditationLevel;
-    private String country;
-    private Boolean active = true;
+    @ManyToOne
+    @JoinColumn(name = "source_program_id")
+    private Program sourceProgram;
 
-    public University() {}
+    @ManyToOne
+    @JoinColumn(name = "target_program_id")
+    private Program targetProgram;
 
-    public University(String name, String accreditationLevel, String country) {
-        this.name = name;
-        this.accreditationLevel = accreditationLevel;
-        this.country = country;
-        this.active = true;
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<CompletedCourse> completedCourses;
+
+    @Enumerated(EnumType.STRING)
+    private TransferStatus status;
+
+    public TransferRequest() {
     }
 
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
+    public TransferRequest(
+            String studentId,
+            Program sourceProgram,
+            Program targetProgram,
+            List<CompletedCourse> completedCourses,
+            TransferStatus status) {
 
-    public String getName() { return name; }
-    public void setName(String name) { this.name = name; }
-
-    public String getAccreditationLevel() { return accreditationLevel; }
-    public void setAccreditationLevel(String accreditationLevel) {
-        this.accreditationLevel = accreditationLevel;
+        this.studentId = studentId;
+        this.sourceProgram = sourceProgram;
+        this.targetProgram = targetProgram;
+        this.completedCourses = completedCourses;
+        this.status = status;
     }
 
-    public String getCountry() { return country; }
-    public void setCountry(String country) { this.country = country; }
+    public Long getId() {
+        return id;
+    }
 
-    public Boolean getActive() { return active; }
-    public void setActive(Boolean active) { this.active = active; }
+    public String getStudentId() {
+        return studentId;
+    }
+
+    public void setStudentId(String studentId) {
+        this.studentId = studentId;
+    }
+
+    public Program getSourceProgram() {
+        return sourceProgram;
+    }
+
+    public void setSourceProgram(Program sourceProgram) {
+        this.sourceProgram = sourceProgram;
+    }
+
+    public Program getTargetProgram() {
+        return targetProgram;
+    }
+
+    public void setTargetProgram(Program targetProgram) {
+        this.targetProgram = targetProgram;
+    }
+
+    public List<CompletedCourse> getCompletedCourses() {
+        return completedCourses;
+    }
+
+    public void setCompletedCourses(List<CompletedCourse> completedCourses) {
+        this.completedCourses = completedCourses;
+    }
+
+    public TransferStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(TransferStatus status) {
+        this.status = status;
+    }
 }
