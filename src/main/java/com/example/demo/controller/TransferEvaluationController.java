@@ -29,4 +29,4 @@ public class TransferEvaluationController {
     public List<TransferEvaluationResult> getEvaluationsForCourse(@PathVariable Long courseId) {
         return service.getEvaluationsForCourse(courseId);
     }
-} 
+}
