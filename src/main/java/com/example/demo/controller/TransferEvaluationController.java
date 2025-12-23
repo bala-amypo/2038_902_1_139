@@ -1,29 +1,32 @@
 package com.example.demo.controller;
 
-import java.util.HashMap;
-import java.util.Map;
-
+import com.example.demo.entity.TransferEvaluationResult;
+import com.example.demo.service.TransferEvaluationService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
-@RequestMapping("/transfer")
+@RequestMapping("/api/transfer-evaluations")
 public class TransferEvaluationController {
 
-    @PostMapping("/evaluate")
-    public Map<String, Object> evaluate(@RequestBody Map<String, Object> request) {
+    @Autowired
+    private TransferEvaluationService service;
 
-        double amount = Double.parseDouble(request.get("amount").toString());
-
-        Map<String, Object> response = new HashMap<>();
-
-        if (amount <= 10000) {
-            response.put("eligible", true);
-            response.put("message", "Transfer Approved");
-        } else {
-            response.put("eligible", false);
-            response.put("message", "Transfer Amount Too High");
-        }
-
-        return response;
+    @PostMapping("/evaluate/{sourceCourseId}/{targetCourseId}")
+    public TransferEvaluationResult evaluateTransfer(@PathVariable Long sourceCourseId,
+                                                     @PathVariable Long targetCourseId) {
+        return service.evaluateTransfer(sourceCourseId, targetCourseId);
     }
-}
+
+    @GetMapping("/{id}")
+    public TransferEvaluationResult getEvaluationById(@PathVariable Long id) {
+        return service.getEvaluationById(id);
+    }
+
+    @GetMapping("/course/{courseId}")
+    public List<TransferEvaluationResult> getEvaluationsForCourse(@PathVariable Long courseId) {
+        return service.getEvaluationsForCourse(courseId);
+    }
+} 
