@@ -3,42 +3,43 @@ package com.example.demo.entity;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "transfer_requests")
-public class TransferRequest {
+@Table(name = "universities", uniqueConstraints = @UniqueConstraint(columnNames = "name"))
+public class University {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long sourceProgramId;
-    private Long targetProgramId;
-    private String studentId;
+    @Column(nullable = false, unique = true)
+    private String name;
 
-    public Long getId() {
-        return id;
+    private String accreditationLevel;
+    private String country;
+    private Boolean active = true;
+
+    public University() {}
+
+    public University(String name, String accreditationLevel, String country) {
+        this.name = name;
+        this.accreditationLevel = accreditationLevel;
+        this.country = country;
+        this.active = true;
     }
 
-    public Long getSourceProgramId() {
-        return sourceProgramId;
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
+
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
+
+    public String getAccreditationLevel() { return accreditationLevel; }
+    public void setAccreditationLevel(String accreditationLevel) {
+        this.accreditationLevel = accreditationLevel;
     }
 
-    public void setSourceProgramId(Long sourceProgramId) {
-        this.sourceProgramId = sourceProgramId;
-    }
+    public String getCountry() { return country; }
+    public void setCountry(String country) { this.country = country; }
 
-    public Long getTargetProgramId() {
-        return targetProgramId;
-    }
-
-    public void setTargetProgramId(Long targetProgramId) {
-        this.targetProgramId = targetProgramId;
-    }
-
-    public String getStudentId() {
-        return studentId;
-    }
-
-    public void setStudentId(String studentId) {
-        this.studentId = studentId;
-    }
+    public Boolean getActive() { return active; }
+    public void setActive(Boolean active) { this.active = active; }
 }
