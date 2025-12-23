@@ -14,7 +14,7 @@ public class CourseContentTopicController {
     @Autowired
     private CourseContentTopicService service;
 
-    @PostMapping
+    @PostMappinga
     public CourseContentTopic createTopic(@RequestBody CourseContentTopic topic) {
         return service.createTopic(topic);
     }
