@@ -1,11 +1,11 @@
 package com.example.demo.repository;
 
-
 import com.example.demo.entity.CourseContentTopic;
-import java.util.*;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface CourseContentTopicRepository {
-    Optional<CourseContentTopic> findById(Long id);
+import java.util.List;
+
+public interface CourseContentTopicRepository extends JpaRepository<CourseContentTopic, Long> {
+
     List<CourseContentTopic> findByCourseId(Long courseId);
-    CourseContentTopic save(CourseContentTopic topic);
 }

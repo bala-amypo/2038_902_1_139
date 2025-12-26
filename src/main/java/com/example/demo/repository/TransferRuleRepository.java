@@ -1,10 +1,14 @@
 package com.example.demo.repository;
 
 import com.example.demo.entity.TransferRule;
-import java.util.*;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface TransferRuleRepository {
-    Optional<TransferRule> findById(Long id);
-    List<TransferRule> findBySourceUniversityIdAndTargetUniversityIdAndActiveTrue(Long sourceId, Long targetId);
-    TransferRule save(TransferRule rule);
+import java.util.List;
+
+public interface TransferRuleRepository extends JpaRepository<TransferRule, Long> {
+
+    List<TransferRule> findBySourceUniversityIdAndTargetUniversityIdAndActiveTrue(
+            Long sourceUniversityId,
+            Long targetUniversityId
+    );
 }
