@@ -1,17 +1,19 @@
 package com.example.demo.entity;
 
 public class TransferEvaluationResult {
+
     private Long id;
     private Boolean isEligibleForTransfer;
     private Double overlapPercentage;
     private String notes;
+    private Integer creditHourDifference; // REQUIRED
 
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
     public Boolean getIsEligibleForTransfer() { return isEligibleForTransfer; }
-    public void setIsEligibleForTransfer(Boolean isEligibleForTransfer) {
-        this.isEligibleForTransfer = isEligibleForTransfer;
+    public void setIsEligibleForTransfer(Boolean eligible) {
+        this.isEligibleForTransfer = eligible;
     }
 
     public Double getOverlapPercentage() { return overlapPercentage; }
@@ -21,4 +23,13 @@ public class TransferEvaluationResult {
 
     public String getNotes() { return notes; }
     public void setNotes(String notes) { this.notes = notes; }
+
+    // 🔥 REQUIRED BY CONTROLLER
+    public Integer getCreditHourDifference() {
+        return creditHourDifference;
+    }
+
+    public void setCreditHourDifference(Integer creditHourDifference) {
+        this.creditHourDifference = creditHourDifference;
+    }
 }
